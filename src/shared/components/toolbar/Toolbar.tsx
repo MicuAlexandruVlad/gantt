@@ -40,7 +40,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ onGantt, onList }) => {
     const listIcon = useMemo(() => {
         return (
             <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10.9999 1.99999L10.9999 20M1.3999 11H19.9999M1.3999 4.99999L1.3999 17C1.3999 18.9882 3.01168 20.6 4.9999 20.6H16.9999C18.9881 20.6 20.5999 18.9882 20.5999 17V4.99999C20.5999 3.01177 18.9881 1.39999 16.9999 1.39999L4.9999 1.39999C3.01168 1.39999 1.3999 3.01177 1.3999 4.99999Z" stroke={ listViewActive ? '#175af9' : '#9a9a9a' } strokeWidth="2"/>
+                <path d="M10.9999 1.99999L10.9999 20M1.3999 11H19.9999M1.3999 4.99999L1.3999 17C1.3999 18.9882 3.01168 20.6 4.9999 20.6H16.9999C18.9881 20.6 20.5999 18.9882 20.5999 17V4.99999C20.5999 3.01177 18.9881 1.39999 16.9999 1.39999L4.9999 1.39999C3.01168 1.39999 1.3999 3.01177 1.3999 4.99999Z" stroke={ listViewActive ? '#175af9' : '#616163' } strokeWidth="2"/>
             </svg>
         )
     }, [listViewActive])
@@ -48,8 +48,8 @@ const Toolbar: React.FC<ToolbarProps> = ({ onGantt, onList }) => {
     const ganttIcon = useMemo(() => {
         return (
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 3C12 1.89543 11.1168 1 10.0274 1L2.9726 1C1.88316 1 1 1.89543 1 3L1 6C1 7.10457 1.88316 8 2.9726 8H10.0274C11.1168 8 12 7.10457 12 6V3Z" stroke={ ganttViewActive ? '#175af9' : '#9a9a9a' } strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M19 17C19 18.1046 18.1168 19 17.0274 19L2.9726 19C1.88316 19 1 18.1046 1 17L1 14C1 12.8954 1.88316 12 2.9726 12L17.0274 12C18.1168 12 19 12.8954 19 14V17Z" stroke={ ganttViewActive ? '#175af9' : '#9a9a9a' } strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M12 3C12 1.89543 11.1168 1 10.0274 1L2.9726 1C1.88316 1 1 1.89543 1 3L1 6C1 7.10457 1.88316 8 2.9726 8H10.0274C11.1168 8 12 7.10457 12 6V3Z" stroke={ ganttViewActive ? '#175af9' : '#616163' } strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M19 17C19 18.1046 18.1168 19 17.0274 19L2.9726 19C1.88316 19 1 18.1046 1 17L1 14C1 12.8954 1.88316 12 2.9726 12L17.0274 12C18.1168 12 19 12.8954 19 14V17Z" stroke={ ganttViewActive ? '#175af9' : '#616163' } strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
         )
     }, [ganttViewActive])
@@ -109,7 +109,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ onGantt, onList }) => {
             <ToolbarButton
                 icon={
                     <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M15.0622 14.5274L18.5354 17.8874M6.53535 8.8874H12.5354M17.4154 8.9274C17.4154 13.2573 13.9053 16.7674 9.57535 16.7674C5.24544 16.7674 1.73535 13.2573 1.73535 8.9274C1.73535 4.59749 5.24544 1.0874 9.57535 1.0874C13.9053 1.0874 17.4154 4.59749 17.4154 8.9274Z" stroke="#121416" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M15.0622 14.5274L18.5354 17.8874M6.53535 8.8874H12.5354M17.4154 8.9274C17.4154 13.2573 13.9053 16.7674 9.57535 16.7674C5.24544 16.7674 1.73535 13.2573 1.73535 8.9274C1.73535 4.59749 5.24544 1.0874 9.57535 1.0874C13.9053 1.0874 17.4154 4.59749 17.4154 8.9274Z" stroke="#121416" strokeWidth="2" strokeLinecap="round"/>
                     </svg>
                 }
                 onClick={ handleZoomOut }
@@ -129,7 +129,6 @@ const Toolbar: React.FC<ToolbarProps> = ({ onGantt, onList }) => {
                 text="Share"
                 addExtraPadding
                 onClick={ handleShare }
-                usePrimary
             />
             <div className="mx-1" />
             <ToolbarButton

@@ -15,7 +15,7 @@ const ViewSwitchButton: React.FC<ViewSwitchButtonProps> = ({ active, icon, butto
         >
             <div className="flex flex-row items-center">
                 { icon }
-                <span className={ `ml-2 ${ active ? "text-[#175af9]" : 'text-[#9a9a9a]' } text-lg` }>{ buttonText }</span>
+                <span className={ `ml-2 ${ active ? "text-[#175af9]" : 'text-[#616163]' } text-lg` }>{ buttonText }</span>
             </div>
             {/* <div className={ `w-full h-[2px] mt-4 bg-[#175af9] ${ active ? "opacity-100" : "opacity-0" }` } /> */}
         </div>

@@ -3,6 +3,7 @@ import './App.css'
 import Gantt from './gantt/Gantt'
 import Toolbar from './shared/components/toolbar/Toolbar'
 import TaskList from './gantt/TaskList'
+import { Provider } from 'jotai'
 
 const App = () => {
 	const [ganttViewActive, setGanttViewActive] = useState(true)
@@ -20,16 +21,18 @@ const App = () => {
 	}, [])
 	
 	return (
-		<div>
-			<Toolbar
-				onGantt={ handleGanttViewSwitch }
-				onList={ handleListViewSwitch }
-			/>
+		<Provider>
 			<div>
-				{ ganttViewActive && <Gantt /> }
-				{ listViewActive && <TaskList /> }
+				<Toolbar
+					onGantt={ handleGanttViewSwitch }
+					onList={ handleListViewSwitch }
+				/>
+				<div>
+					{ ganttViewActive && <Gantt /> }
+					{ listViewActive && <TaskList /> }
+				</div>
 			</div>
-		</div>
+		</Provider>
 	)
 }
 
