@@ -1,10 +1,10 @@
 import React, { memo } from "react"
 
-interface TaskCanvasProps {
+interface TaskListProps {
 
 }
 
-const TaskList: React.FC<TaskCanvasProps> = () => {
+const TaskList: React.FC<TaskListProps> = () => {
     return (
         <div>
             
