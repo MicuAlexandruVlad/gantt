@@ -1,13 +1,12 @@
 import React from "react"
-import Toolbar from "./components/toolbar/Toolbar"
 
 type GanttProps = {}
 
 const Gantt: React.FC<GanttProps> = ({}) => {
     return (
-        <>
-            <Toolbar />
-        </>
+        <div className="w-full h-full flex flex-col">
+            <span>Gantt View</span>
+        </div>
     )
 }
 
