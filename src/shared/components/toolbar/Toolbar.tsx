@@ -5,9 +5,10 @@ import ToolbarButton from "./components/toolbarButton/ToolbarButton"
 interface ToolbarProps {
     onGantt: () => void
     onList: () => void
+    onNewTask: () => void
 }
 
-const Toolbar: React.FC<ToolbarProps> = ({ onGantt, onList }) => {
+const Toolbar: React.FC<ToolbarProps> = ({ onGantt, onList, onNewTask }) => {
     const [ganttViewActive, setGanttViewActive] = React.useState(true)
     const [listViewActive, setListViewActive] = React.useState(false)
 
@@ -84,7 +85,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ onGantt, onList }) => {
                         <path d="M5.99995 1.2002L5.99995 10.8002M10.8 6.00019L1.19995 6.0002" stroke="white" strokeWidth="2" strokeLinecap="round"/>
                     </svg>
                 }
-                onClick={ () => {} }
+                onClick={ onNewTask }
             />
             { separator }
             <ToolbarButton

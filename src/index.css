@@ -13,6 +13,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-y: hidden;
 }
 
 a {
@@ -26,9 +27,10 @@ a:hover {
 
 body {
   margin: 0;
-  /* display: flex; */
-  /* place-items: center;
+  display: flex;
+  place-items: center;
+  justify-content: center;
   min-width: 320px;
-  min-height: 100vh; */
+  min-height: 100vh;
 }
 
