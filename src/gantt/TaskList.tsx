@@ -9,10 +9,10 @@ type TaskListProps = {}
 const TaskList: React.FC<TaskListProps> = ({}) => {
     const [tasks, setTasks] = useAtom(tasksAtom)
     const [selectedTasks, setSelectedTasks] = useAtom(selectedTasksAtom)
-    const [allSelected, setAllSelected] = useAtom(allSelectedAtom)
+    const [allSelected, toggleAllSelected] = useAtom(allSelectedAtom)
 
     const handleSelectAll = useCallback(() => {
-        setAllSelected()
+        toggleAllSelected()
     }, [])
 
     const handleItemSelect = useCallback((taskId: string) => {

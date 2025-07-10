@@ -396,24 +396,10 @@ const defaultTasks: Task[] = [{
 }]
 
 export const tasksAtom = atom<Task[]>(defaultTasks)
+tasksAtom.debugLabel = 'tasksAtom'
 
 export const selectedTasksAtom = atom<Set<string>>(new Set<string>())
-
-export const toggleTaskSelectionAtom = atom(
-    null,
-    (get, set, taskId: string) => {
-        const selectedTasks = get(selectedTasksAtom)
-        const newSelectedTasks = new Set(selectedTasks)
-
-        if (newSelectedTasks.has(taskId)) {
-            newSelectedTasks.delete(taskId)
-        } else {
-            newSelectedTasks.add(taskId)
-        }
-
-        set(selectedTasksAtom, newSelectedTasks)
-    }
-)
+selectedTasksAtom.debugLabel = 'selectedTasksAtom'
 
 export const allSelectedAtom = atom(
     // Getter: compute if all tasks are selected
@@ -436,5 +422,6 @@ export const allSelectedAtom = atom(
         }
     }
 )
+allSelectedAtom.debugLabel = 'allSelectedAtom'
 
 
