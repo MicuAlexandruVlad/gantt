@@ -3,7 +3,6 @@ import './App.css'
 import Gantt from './gantt/Gantt'
 import Toolbar from './shared/components/toolbar/Toolbar'
 import TaskList from './gantt/TaskList'
-import { Provider } from 'jotai'
 import NewTaskModal from './shared/components/modals/newTaskModal/NewTaskModal'
 
 const App = () => {
@@ -30,7 +29,7 @@ const App = () => {
 	}, [])
     
     return (
-        <Provider>
+        <>
             <div className="h-screen w-screen flex flex-col overflow-hidden">
                 <Toolbar
                     onGantt={ handleGanttViewSwitch }
@@ -46,7 +45,7 @@ const App = () => {
 				open={ newTaskModalVisible }
 				onClose={ onNewTaskModalClose }
 			/>
-        </Provider>
+        </>
     )
 }
 

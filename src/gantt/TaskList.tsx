@@ -33,7 +33,7 @@ const TaskList: React.FC<TaskListProps> = ({}) => {
             {/* Single scrollable container for both header and content */}
             <div className="flex-1 overflow-auto">
                 {/* Sticky header */}
-                <div className="sticky min-w-fit top-0 z-10 bg-[#f7f8fa] py-4 text-[#656771] shadow grid grid-cols-[minmax(20px,20px)_minmax(200px,1fr)_minmax(120px,150px)_minmax(120px,150px)_minmax(100px,120px)_minmax(100px,150px)_minmax(100px,120px)_minmax(80px,120px)_minmax(120px,120px)_minmax(80px,120px)] gap-2 p-2">
+                <div className="sticky min-w-fit top-0 z-2 bg-[#f7f8fa] py-4 text-[#656771] shadow grid grid-cols-[minmax(20px,20px)_minmax(200px,1fr)_minmax(120px,150px)_minmax(120px,150px)_minmax(100px,120px)_minmax(100px,150px)_minmax(100px,120px)_minmax(80px,120px)_minmax(120px,120px)_minmax(80px,120px)] gap-2 p-2">
                     <div className="mt-auto mb-auto">
                         <Checkbox
                             checked={ allSelected }
