@@ -37,10 +37,12 @@ const NewTaskModal: React.FC<NewTaskModalProps> = ({ open, onClose }) => {
                     // height: '300px',
                     borderRadius: '8px',
                     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-                    userSelect: 'none'
+                    userSelect: 'none',
+                    zIndex: 1000,
                 },
                 overlay: {
                     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                    zIndex: 999,
                 }
             }}
         >
