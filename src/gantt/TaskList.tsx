@@ -96,4 +96,4 @@ const ListRow: React.FC<{
     return prev.selected === next.selected && JSON.stringify(prev.task) === JSON.stringify(next.task)
 })
 
-export default TaskList
+export default memo(TaskList)

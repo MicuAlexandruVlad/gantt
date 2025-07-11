@@ -2,6 +2,12 @@ import React, { memo, useCallback } from "react"
 import Modal from 'react-modal'
 import TextInput from "../../inputs/textInput/TextInput"
 import LargeTextInput from "../../inputs/largeTextInput/LargeTextInput"
+import DatePickerInput from "../../inputs/datePickerInput/DatePickerInput"
+import SimpleButton from "../../buttons/simpleButton/SimpleButton"
+import type Task from "../../../../data/Task"
+import { useAtom } from "jotai"
+import { tasksAtom } from "../../../store/Tasks"
+import { useNewTaskForm } from "../../../store/TaskCreationStore"
 
 type NewTaskModalProps = {
     open: boolean
@@ -9,14 +15,37 @@ type NewTaskModalProps = {
 }
 
 const NewTaskModal: React.FC<NewTaskModalProps> = ({ open, onClose }) => {
-    const [taskName, setTaskName] = React.useState("")
-    const [description, setDescription] = React.useState("")
+    const [, setTasks] = useAtom(tasksAtom)
+    const newTaskForm = useNewTaskForm()
     
+    const [taskName, setTaskName] = newTaskForm.useTaskName()
+    const [description, setDescription] = newTaskForm.useDescription()
+    const [startDate, setStartDate] = newTaskForm.useStartDate()
+    const [dueDate, setDueDate] = newTaskForm.useDueDate()
+    
+    const handleSave = () => {
+        const task: Task = {
+            id: Math.random().toString(36).substring(2, 15), // simple random ID
+            name: taskName,
+            description: description,
+            start: startDate ? startDate : new Date(),
+            end: dueDate ? dueDate : new Date(),
+            assignedTo: [],
+            priority: 'medium',
+            progress: 0,
+        }
+
+        console.log("New Task Created:", task)
+
+        setTasks(prev => [...prev, task])
+
+        handleClose()
+    }
+
     const handleClose = useCallback(() => {
         setTimeout(() => {
             // clear modal data
-            setTaskName("")
-            setDescription("")
+            newTaskForm.resetForm()
         }, 100)
         onClose()
     }, [])
@@ -33,8 +62,6 @@ const NewTaskModal: React.FC<NewTaskModalProps> = ({ open, onClose }) => {
                     bottom: 'auto',
                     marginRight: '-50%',
                     transform: 'translate(-50%, -50%)',
-                    // width: '400px',
-                    // height: '300px',
                     borderRadius: '8px',
                     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
                     userSelect: 'none',
@@ -46,7 +73,7 @@ const NewTaskModal: React.FC<NewTaskModalProps> = ({ open, onClose }) => {
                 }
             }}
         >
-            <div className="flex max-h-[60vh] overflow-y-auto flex-col p-2 min-w-[500px] bg-white rounded-md">
+            <div className="flex max-h-[80vh] overflow-y-auto flex-col p-2 min-w-[500px] bg-white rounded-md">
                 {/* Header */}
                 <span className="text-xl font-bold">Create New Task</span>
                 <div
@@ -69,6 +96,29 @@ const NewTaskModal: React.FC<NewTaskModalProps> = ({ open, onClose }) => {
                         value={ description }
                         placeholder="Enter task description"
                         onChange={ setDescription }
+                    />
+                    <DatePickerInput
+                        value={ startDate }
+                        label="Start Date"
+                        placeholder="Select start date"
+                        onChange={ setStartDate }
+                    />
+                    <DatePickerInput
+                        value={ dueDate }
+                        label="Due Date"
+                        placeholder="Select due date"
+                        onChange={ setDueDate }
+                    />
+                </div>
+                <div className="flex flex-row items-center mt-8 gap-2 self-end">
+                    <SimpleButton
+                        text="Cancel"
+                        useSecondary
+                        onClick={ handleClose }
+                    />
+                    <SimpleButton
+                        text="Create"
+                        onClick={ handleSave }
                     />
                 </div>
             </div>
