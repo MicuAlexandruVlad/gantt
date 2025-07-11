@@ -5,6 +5,8 @@ import Toolbar from './shared/components/toolbar/Toolbar'
 import TaskList from './gantt/TaskList'
 import NewTaskModal from './shared/components/modals/newTaskModal/NewTaskModal'
 import { Provider } from 'jotai'
+import FloatingAlert from './shared/components/alerts/floatingAlert/FloatingAlert'
+import { AnimatePresence } from 'framer-motion'
 
 const App = () => {
     const [ganttViewActive, setGanttViewActive] = useState(true)
@@ -39,14 +41,17 @@ const App = () => {
                         onNewTask={ onNewTask }
                     />
                     <div className="flex-1 overflow-hidden">
-                        { ganttViewActive && <Gantt /> }
-                        { listViewActive && <TaskList /> }
+                        <AnimatePresence mode='wait'>
+                            { ganttViewActive && <Gantt /> }
+                            { listViewActive && <TaskList /> }
+                        </AnimatePresence>
                     </div>
                 </div>
                 <NewTaskModal
                     open={ newTaskModalVisible }
                     onClose={ onNewTaskModalClose }
                 />
+                <FloatingAlert />
             </Provider>
         </>
     )

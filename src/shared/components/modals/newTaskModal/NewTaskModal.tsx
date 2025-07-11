@@ -8,6 +8,7 @@ import type Task from "../../../../data/Task"
 import { useAtom } from "jotai"
 import { tasksAtom } from "../../../store/Tasks"
 import { useNewTaskForm } from "../../../store/TaskCreationStore"
+import { showFloatingAlertAtom } from "../../../store/FloatingAlertStore"
 
 type NewTaskModalProps = {
     open: boolean
@@ -16,6 +17,7 @@ type NewTaskModalProps = {
 
 const NewTaskModal: React.FC<NewTaskModalProps> = ({ open, onClose }) => {
     const [, setTasks] = useAtom(tasksAtom)
+    const [, showFloatingAlert] = useAtom(showFloatingAlertAtom)
     const newTaskForm = useNewTaskForm()
     
     const [taskName, setTaskName] = newTaskForm.useTaskName()
@@ -24,22 +26,32 @@ const NewTaskModal: React.FC<NewTaskModalProps> = ({ open, onClose }) => {
     const [dueDate, setDueDate] = newTaskForm.useDueDate()
     
     const handleSave = () => {
-        const task: Task = {
-            id: Math.random().toString(36).substring(2, 15), // simple random ID
-            name: taskName,
-            description: description,
-            start: startDate ? startDate : new Date(),
-            end: dueDate ? dueDate : new Date(),
-            assignedTo: [],
-            priority: 'medium',
-            progress: 0,
+        if (newTaskForm.isValid) {
+            const task: Task = {
+                id: Math.random().toString(36).substring(2, 15), // simple random ID
+                name: taskName,
+                description: description,
+                start: startDate ? startDate : new Date(),
+                end: dueDate ? dueDate : new Date(),
+                assignedTo: [],
+                priority: 'medium',
+                progress: 0,
+            }
+
+            console.log("New Task Created:", task)
+
+            setTasks(prev => [...prev, task])
+
+            handleClose()
+        } else {
+            showFloatingAlert({
+                visible: true,
+                title: "Error",
+                message: "Please fill in all required fields.",
+                type: "error",
+                duration: 3000,
+            })
         }
-
-        console.log("New Task Created:", task)
-
-        setTasks(prev => [...prev, task])
-
-        handleClose()
     }
 
     const handleClose = useCallback(() => {

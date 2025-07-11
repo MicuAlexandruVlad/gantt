@@ -3,6 +3,7 @@ import React, { memo, useCallback } from "react"
 import { allSelectedAtom, selectedTasksAtom, tasksAtom } from "../shared/store/Tasks"
 import type Task from "../data/Task"
 import Checkbox from "../shared/components/checkbox/Checkbox"
+import { motion } from "framer-motion"
 
 type TaskListProps = {}
 
@@ -74,7 +75,12 @@ const ListRow: React.FC<{
     }, [])
 
     return (
-        <div className={`${ selected && "bg-[#f3f5fc]" } py-4 border-b border-[#e9e9e9] grid grid-cols-[minmax(20px,20px)_minmax(200px,1fr)_minmax(120px,150px)_minmax(120px,150px)_minmax(100px,120px)_minmax(100px,150px)_minmax(100px,120px)_minmax(80px,120px)_minmax(120px,120px)_minmax(80px,120px)] gap-2 px-2`}>
+        <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className={`${ selected && "bg-[#f3f5fc]" } py-4 border-b border-[#e9e9e9] grid grid-cols-[minmax(20px,20px)_minmax(200px,1fr)_minmax(120px,150px)_minmax(120px,150px)_minmax(100px,120px)_minmax(100px,150px)_minmax(100px,120px)_minmax(80px,120px)_minmax(120px,120px)_minmax(80px,120px)] gap-2 px-2`}>
             <div className="mt-auto mb-auto">
                 <Checkbox
                     checked={ selected }
@@ -90,7 +96,7 @@ const ListRow: React.FC<{
             <p className="truncate">{ task.description || 'No description' }</p>
             <p className="truncate">{ task.completed ? 'Completed' : 'Not completed' }</p>
             <p className="truncate">{ task.priority.charAt(0).toUpperCase() + task.priority.slice(1) }</p>
-        </div>
+        </motion.div>
     )
 }, (prev, next) => {
     return prev.selected === next.selected && JSON.stringify(prev.task) === JSON.stringify(next.task)
