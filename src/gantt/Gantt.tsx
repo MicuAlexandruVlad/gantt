@@ -1,4 +1,4 @@
-import React from "react"
+import React, { memo } from "react"
 
 type GanttProps = {}
 
@@ -11,4 +11,4 @@ const Gantt: React.FC<GanttProps> = ({}) => {
     )
 }
 
-export default Gantt
+export default memo(Gantt)
