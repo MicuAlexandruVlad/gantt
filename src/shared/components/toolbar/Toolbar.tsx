@@ -1,6 +1,7 @@
 import React, { memo, useCallback, useMemo } from "react"
 import ViewSwitchButton from "./components/viewSwitchButton/ViewSwitchButton"
 import ToolbarButton from "./components/toolbarButton/ToolbarButton"
+import { AnimatePresence, motion } from 'framer-motion'
 
 interface ToolbarProps {
     onGantt: () => void
@@ -60,7 +61,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ onGantt, onList, onNewTask }) => {
     }, [])
     
     return (
-        <div className="flex flex-row items-center py-2 px-4 border-1 mt-1 border-[#e5e5e5]">
+        <motion.div layout className="flex flex-row items-center py-2 px-4 border-1 mt-1 border-[#e5e5e5]">
             <div className="flex flex-row items-center gap-4">
                 <ViewSwitchButton
                     active={ ganttViewActive }
@@ -77,44 +78,61 @@ const Toolbar: React.FC<ToolbarProps> = ({ onGantt, onList, onNewTask }) => {
                 />
             </div>
             <div className="flex-1" />
-            <ToolbarButton
-                usePrimary
-                useRound
-                icon={
-                    <svg width="14" height="14" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5.99995 1.2002L5.99995 10.8002M10.8 6.00019L1.19995 6.0002" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-                    </svg>
-                }
-                onClick={ onNewTask }
-            />
-            { separator }
-            <ToolbarButton
-                text="Filter"
-                icon={
-                    <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M3.46154 6H14.5385M1 1H17M7.15385 11H10.8462" stroke="#121416" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                }
-                onClick={ handleFilter }
-            />
-            { separator }
-            <ToolbarButton
-                icon={
-                    <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M15.7575 13.8087C15.3606 13.4247 14.7275 13.4352 14.3435 13.8321C13.9595 14.229 13.97 14.8621 14.3669 15.2461L15.7575 13.8087ZM17.84 18.6061C18.237 18.9901 18.8701 18.9796 19.2541 18.5827C19.6381 18.1858 19.6276 17.5527 19.2307 17.1687L17.84 18.6061ZM8.53535 11.8874C8.53535 12.4397 8.98307 12.8874 9.53535 12.8874C10.0876 12.8874 10.5354 12.4397 10.5354 11.8874H8.53535ZM10.5354 5.8874C10.5354 5.33512 10.0876 4.8874 9.53535 4.8874C8.98307 4.8874 8.53535 5.33512 8.53535 5.8874H10.5354ZM6.53535 7.8874C5.98307 7.8874 5.53535 8.33512 5.53535 8.8874C5.53535 9.43969 5.98307 9.8874 6.53535 9.8874V7.8874ZM12.5354 9.8874C13.0876 9.8874 13.5354 9.43969 13.5354 8.8874C13.5354 8.33512 13.0876 7.8874 12.5354 7.8874V9.8874ZM16.4154 8.9274C16.4154 12.705 13.353 15.7674 9.57535 15.7674V17.7674C14.4575 17.7674 18.4154 13.8096 18.4154 8.9274H16.4154ZM9.57535 15.7674C5.79772 15.7674 2.73535 12.705 2.73535 8.9274H0.735352C0.735352 13.8096 4.69315 17.7674 9.57535 17.7674V15.7674ZM2.73535 8.9274C2.73535 5.14977 5.79772 2.0874 9.57535 2.0874V0.0874023C4.69315 0.0874023 0.735352 4.04521 0.735352 8.9274H2.73535ZM9.57535 2.0874C13.353 2.0874 16.4154 5.14977 16.4154 8.9274H18.4154C18.4154 4.04521 14.4575 0.0874023 9.57535 0.0874023V2.0874ZM14.3669 15.2461L17.84 18.6061L19.2307 17.1687L15.7575 13.8087L14.3669 15.2461ZM10.5354 11.8874V8.8874H8.53535V11.8874H10.5354ZM10.5354 8.8874V5.8874H8.53535V8.8874H10.5354ZM6.53535 9.8874H9.53535V7.8874H6.53535V9.8874ZM9.53535 9.8874H12.5354V7.8874H9.53535V9.8874Z" fill="#121416"/>
-                    </svg>
-                }
-                onClick={ handleZoomIn }
-            />
-            <div className="mx-1" />
-            <ToolbarButton
-                icon={
-                    <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M15.0622 14.5274L18.5354 17.8874M6.53535 8.8874H12.5354M17.4154 8.9274C17.4154 13.2573 13.9053 16.7674 9.57535 16.7674C5.24544 16.7674 1.73535 13.2573 1.73535 8.9274C1.73535 4.59749 5.24544 1.0874 9.57535 1.0874C13.9053 1.0874 17.4154 4.59749 17.4154 8.9274Z" stroke="#121416" strokeWidth="2" strokeLinecap="round"/>
-                    </svg>
-                }
-                onClick={ handleZoomOut }
-            />
+            <AnimatePresence mode="wait">
+                <motion.div layout className="flex flex-row items-center">
+                    <ToolbarButton
+                        usePrimary
+                        useRound
+                        icon={
+                            <svg width="14" height="14" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5.99995 1.2002L5.99995 10.8002M10.8 6.00019L1.19995 6.0002" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+                            </svg>
+                        }
+                        onClick={ onNewTask }
+                    />
+                    { separator }
+                    <ToolbarButton
+                        text="Filter"
+                        icon={
+                            <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3.46154 6H14.5385M1 1H17M7.15385 11H10.8462" stroke="#121416" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                        }
+                        onClick={ handleFilter }
+                    />
+                </motion.div>
+            </AnimatePresence>
+            <AnimatePresence mode="popLayout">
+            {
+                ganttViewActive &&
+                <motion.div
+                    className="flex flex-row items-center"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                >
+                    { separator }
+                    <ToolbarButton
+                        icon={
+                            <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15.7575 13.8087C15.3606 13.4247 14.7275 13.4352 14.3435 13.8321C13.9595 14.229 13.97 14.8621 14.3669 15.2461L15.7575 13.8087ZM17.84 18.6061C18.237 18.9901 18.8701 18.9796 19.2541 18.5827C19.6381 18.1858 19.6276 17.5527 19.2307 17.1687L17.84 18.6061ZM8.53535 11.8874C8.53535 12.4397 8.98307 12.8874 9.53535 12.8874C10.0876 12.8874 10.5354 12.4397 10.5354 11.8874H8.53535ZM10.5354 5.8874C10.5354 5.33512 10.0876 4.8874 9.53535 4.8874C8.98307 4.8874 8.53535 5.33512 8.53535 5.8874H10.5354ZM6.53535 7.8874C5.98307 7.8874 5.53535 8.33512 5.53535 8.8874C5.53535 9.43969 5.98307 9.8874 6.53535 9.8874V7.8874ZM12.5354 9.8874C13.0876 9.8874 13.5354 9.43969 13.5354 8.8874C13.5354 8.33512 13.0876 7.8874 12.5354 7.8874V9.8874ZM16.4154 8.9274C16.4154 12.705 13.353 15.7674 9.57535 15.7674V17.7674C14.4575 17.7674 18.4154 13.8096 18.4154 8.9274H16.4154ZM9.57535 15.7674C5.79772 15.7674 2.73535 12.705 2.73535 8.9274H0.735352C0.735352 13.8096 4.69315 17.7674 9.57535 17.7674V15.7674ZM2.73535 8.9274C2.73535 5.14977 5.79772 2.0874 9.57535 2.0874V0.0874023C4.69315 0.0874023 0.735352 4.04521 0.735352 8.9274H2.73535ZM9.57535 2.0874C13.353 2.0874 16.4154 5.14977 16.4154 8.9274H18.4154C18.4154 4.04521 14.4575 0.0874023 9.57535 0.0874023V2.0874ZM14.3669 15.2461L17.84 18.6061L19.2307 17.1687L15.7575 13.8087L14.3669 15.2461ZM10.5354 11.8874V8.8874H8.53535V11.8874H10.5354ZM10.5354 8.8874V5.8874H8.53535V8.8874H10.5354ZM6.53535 9.8874H9.53535V7.8874H6.53535V9.8874ZM9.53535 9.8874H12.5354V7.8874H9.53535V9.8874Z" fill="#121416"/>
+                            </svg>
+                        }
+                        onClick={ handleZoomIn }
+                    />
+                    <div className="mx-1" />
+                    <ToolbarButton
+                        icon={
+                            <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15.0622 14.5274L18.5354 17.8874M6.53535 8.8874H12.5354M17.4154 8.9274C17.4154 13.2573 13.9053 16.7674 9.57535 16.7674C5.24544 16.7674 1.73535 13.2573 1.73535 8.9274C1.73535 4.59749 5.24544 1.0874 9.57535 1.0874C13.9053 1.0874 17.4154 4.59749 17.4154 8.9274Z" stroke="#121416" strokeWidth="2" strokeLinecap="round"/>
+                            </svg>
+                        }
+                        onClick={ handleZoomOut }
+                    />
+                </motion.div>
+            }
+            </AnimatePresence>
             { separator }
             <ToolbarButton
                 text="Export"
@@ -142,7 +160,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ onGantt, onList, onNewTask }) => {
                 }
                 onClick={ handleMenu }
             />
-        </div>
+        </motion.div>
     )
 }
 
