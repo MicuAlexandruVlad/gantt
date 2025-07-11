@@ -24,4 +24,4 @@ const ToolbarButton: React.FC<ToolbarButtonProps> = ({
     )
 }
 
-export default memo(ToolbarButton, (prev, next) => true)
+export default memo(ToolbarButton, (prev, next) => prev.onClick === next.onClick)

@@ -4,11 +4,15 @@ import Gantt from './gantt/Gantt'
 import Toolbar from './shared/components/toolbar/Toolbar'
 import TaskList from './gantt/TaskList'
 import NewTaskModal from './shared/components/modals/newTaskModal/NewTaskModal'
-import { Provider } from 'jotai'
+import { useAtom } from 'jotai'
 import FloatingAlert from './shared/components/alerts/floatingAlert/FloatingAlert'
 import { AnimatePresence } from 'framer-motion'
+import { selectedTasksAtom, tasksAtom } from './shared/store/Tasks'
+import { createExcelFile } from './shared/utils/excel/ExcelFactory'
 
 const App = () => {
+    const [tasks,] = useAtom(tasksAtom)
+    const [selectedTasks] = useAtom(selectedTasksAtom)
     const [ganttViewActive, setGanttViewActive] = useState(true)
     const [listViewActive, setListViewActive] = useState(false)
 	const [newTaskModalVisible, setNewTaskModalVisible] = useState(false)
@@ -30,29 +34,40 @@ const App = () => {
 	const onNewTaskModalClose = useCallback(() => {
 		setNewTaskModalVisible(false)
 	}, [])
+
+    const onExport = useCallback(() => {
+        let data = [...tasks]
+
+        if (selectedTasks.size > 0) {
+            data = tasks.filter(task => selectedTasks.has(task.id))
+        }
+
+        console.log('selectedTasks:', selectedTasks)
+        
+        createExcelFile(data, 'tasks_export')
+    }, [tasks, selectedTasks])
     
     return (
         <>
-            <Provider>
-                <div className="h-screen w-screen flex flex-col overflow-hidden">
-                    <Toolbar
-                        onGantt={ handleGanttViewSwitch }
-                        onList={ handleListViewSwitch }
-                        onNewTask={ onNewTask }
-                    />
-                    <div className="flex-1 overflow-hidden">
-                        <AnimatePresence mode='wait'>
-                            { ganttViewActive && <Gantt /> }
-                            { listViewActive && <TaskList /> }
-                        </AnimatePresence>
-                    </div>
-                </div>
-                <NewTaskModal
-                    open={ newTaskModalVisible }
-                    onClose={ onNewTaskModalClose }
+            <div className="h-screen w-screen flex flex-col overflow-hidden">
+                <Toolbar
+                    onExport={ onExport }
+                    onGantt={ handleGanttViewSwitch }
+                    onList={ handleListViewSwitch }
+                    onNewTask={ onNewTask }
                 />
-                <FloatingAlert />
-            </Provider>
+                <div className="flex-1 overflow-hidden">
+                    <AnimatePresence mode='wait'>
+                        { ganttViewActive && <Gantt /> }
+                        { listViewActive && <TaskList /> }
+                    </AnimatePresence>
+                </div>
+            </div>
+            <NewTaskModal
+                open={ newTaskModalVisible }
+                onClose={ onNewTaskModalClose }
+            />
+            <FloatingAlert />
         </>
     )
 }

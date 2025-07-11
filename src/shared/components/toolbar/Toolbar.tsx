@@ -7,9 +7,10 @@ interface ToolbarProps {
     onGantt: () => void
     onList: () => void
     onNewTask: () => void
+    onExport: () => void
 }
 
-const Toolbar: React.FC<ToolbarProps> = ({ onGantt, onList, onNewTask }) => {
+const Toolbar: React.FC<ToolbarProps> = ({ onGantt, onList, onNewTask, onExport }) => {
     const [ganttViewActive, setGanttViewActive] = React.useState(true)
     const [listViewActive, setListViewActive] = React.useState(false)
 
@@ -32,8 +33,6 @@ const Toolbar: React.FC<ToolbarProps> = ({ onGantt, onList, onNewTask }) => {
     const handleZoomIn = useCallback(() => {}, [])
 
     const handleZoomOut = useCallback(() => {}, [])
-
-    const handleExport = useCallback(() => {}, [])
 
     const handleShare = useCallback(() => {}, [])
 
@@ -141,7 +140,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ onGantt, onList, onNewTask }) => {
                         <path d="M1.6001 14.2197V17.9256C1.6001 18.4873 1.82135 19.0259 2.21517 19.423C2.609 19.8202 3.14314 20.0433 3.7001 20.0433H16.3001C16.8571 20.0433 17.3912 19.8202 17.785 19.423C18.1788 19.0259 18.4001 18.4872 18.4001 17.9256V14.2197M10.0435 13.9565L10.0435 1.95654M10.0435 1.95654L5.24346 6.54169M10.0435 1.95654L14.8434 6.54169" stroke="#121416" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                 }
-                onClick={ handleExport }
+                onClick={ onExport }
             />
             <div className="mx-1" />
             <ToolbarButton
