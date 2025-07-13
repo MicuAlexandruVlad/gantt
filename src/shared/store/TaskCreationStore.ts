@@ -7,6 +7,7 @@ export const newTaskModalFormDataAtom = atomWithReset({
     description: "",
     startDate: null as Date | null,
     dueDate: null as Date | null,
+    priority: ''
 })
 
 export const newTaskModalFormValidationAtom = atom((get) => {
@@ -51,6 +52,14 @@ const dueDateAtom = atom(
     }
 )
 
+const priorityAtom = atom(
+    (get) => get(newTaskModalFormDataAtom).priority,
+    (get, set, value: string) => {
+        const current = get(newTaskModalFormDataAtom)
+        set(newTaskModalFormDataAtom, { ...current, priority: value })
+    }
+)
+
 // Custom hook for form management
 export const useNewTaskForm = () => {
     const [formData, setFormData] = useAtom(newTaskModalFormDataAtom)
@@ -62,6 +71,7 @@ export const useNewTaskForm = () => {
         useDescription: () => useAtom(descriptionAtom),
         useStartDate: () => useAtom(startDateAtom),
         useDueDate: () => useAtom(dueDateAtom),
+        usePriority: () => useAtom(priorityAtom),
         
         // Form-level actions
         isValid,

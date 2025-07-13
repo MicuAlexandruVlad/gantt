@@ -9,6 +9,7 @@ import { useAtom } from "jotai"
 import { tasksAtom } from "../../../store/Tasks"
 import { useNewTaskForm } from "../../../store/TaskCreationStore"
 import { showFloatingAlertAtom } from "../../../store/FloatingAlertStore"
+import DropdownSingleSelectInput from "../../inputs/dropdownSingleSelectInput/DropdownSingleSelectInput"
 
 type NewTaskModalProps = {
     open: boolean
@@ -24,6 +25,7 @@ const NewTaskModal: React.FC<NewTaskModalProps> = ({ open, onClose }) => {
     const [description, setDescription] = newTaskForm.useDescription()
     const [startDate, setStartDate] = newTaskForm.useStartDate()
     const [dueDate, setDueDate] = newTaskForm.useDueDate()
+    const [priority, setPriority] = newTaskForm.usePriority()
     
     const handleSave = () => {
         if (newTaskForm.isValid) {
@@ -108,6 +110,13 @@ const NewTaskModal: React.FC<NewTaskModalProps> = ({ open, onClose }) => {
                         value={ description }
                         placeholder="Enter task description"
                         onChange={ setDescription }
+                    />
+                    <DropdownSingleSelectInput
+                        options={ ['low', 'medium', 'high'] }
+                        selectedOption={ priority }
+                        onSelect={ setPriority }
+                        label="Priority"
+                        placeholder="Select priority"
                     />
                     <DatePickerInput
                         value={ startDate }

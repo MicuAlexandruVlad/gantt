@@ -1,5 +1,7 @@
 import type Assignee from "./Assignee"
 
+export type priority = 'low' | 'medium' | 'high'
+
 export interface BaseTask {
     id: string
     name: string
@@ -24,7 +26,7 @@ export default interface Task extends BaseTask {
     progress: number // Optional, as some tasks may not have progress defined
     dependencies?: string[] // Optional, to allow for task dependencies
     description?: string // Optional, for additional task details
-    priority: 'low' | 'medium' | 'high' // Optional, to indicate task priority
+    priority: priority // Optional, to indicate task priority
     assignedTo: Assignee[] // Optional, to indicate who the task is assigned to
     isActive?: boolean // Optional, to indicate if the task is currently active
 }
