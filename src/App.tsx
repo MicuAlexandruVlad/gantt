@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState } from 'react'
 import './App.css'
 import Gantt from './gantt/Gantt'
 import Toolbar from './shared/components/toolbar/Toolbar'
-import TaskList from './gantt/TaskList'
+import LargeTaskList from './gantt/LargeTaskList'
 import NewTaskModal from './shared/components/modals/newTaskModal/NewTaskModal'
 import { useAtom } from 'jotai'
 import FloatingAlert from './shared/components/alerts/floatingAlert/FloatingAlert'
@@ -81,7 +81,7 @@ const App = () => {
                 <div className="flex-1 overflow-hidden">
                     <AnimatePresence mode='wait'>
                         { ganttViewActive && <Gantt /> }
-                        { listViewActive && <TaskList /> }
+                        { listViewActive && <LargeTaskList /> }
                     </AnimatePresence>
                 </div>
             </div>

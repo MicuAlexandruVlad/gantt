@@ -7,7 +7,7 @@ import { motion } from "framer-motion"
 
 type TaskListProps = {}
 
-const TaskList: React.FC<TaskListProps> = ({}) => {
+const LargeTaskList: React.FC<TaskListProps> = ({}) => {
     const [tasks, _] = useAtom(tasksAtom)
     const [selectedTasks, setSelectedTasks] = useAtom(selectedTasksAtom)
     const [allSelected, toggleAllSelected] = useAtom(allSelectedAtom)
@@ -102,4 +102,4 @@ const ListRow: React.FC<{
     return prev.selected === next.selected && JSON.stringify(prev.task) === JSON.stringify(next.task)
 })
 
-export default memo(TaskList)
+export default memo(LargeTaskList)
