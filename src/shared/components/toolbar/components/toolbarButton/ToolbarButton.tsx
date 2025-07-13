@@ -43,7 +43,8 @@ const ToolbarButton: React.FC<ToolbarButtonProps> = ({
     return (
         <div
             onClick={onClick}
-            className={`flex h-full ${ bgColor && `bg-[${bgColor}]` } min-w-[42px] min-h-[42px] justify-center flex-row items-center gap-2 cursor-pointer ${!bgColor && "border-1 border-[#e5e5e5]"} ${useRound ? "rounded-full" : "rounded-md"} p-2 ${addExtraPadding && "px-4"} transition-colors ${bgColor ? '' : 'bg-white hover:bg-[#f5f5f5] active:bg-[#e0e0e0]'}`}
+            className={`flex h-full min-w-[42px] min-h-[42px] justify-center flex-row items-center gap-2 cursor-pointer ${!bgColor && "border-1 border-[#e5e5e5]"} ${useRound ? "rounded-full" : "rounded-md"} p-2 ${addExtraPadding && "px-4"} transition-colors ${bgColor ? '' : 'bg-white hover:bg-[#f5f5f5] active:bg-[#e0e0e0]'}`}
+            style={{ backgroundColor: bgColor || 'transparent' }}
             onMouseEnter={(e) => {
                 if (bgColor && bgDerivedColors) {
                     e.currentTarget.style.backgroundColor = bgDerivedColors.hover

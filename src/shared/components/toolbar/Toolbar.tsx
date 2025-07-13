@@ -62,7 +62,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ hasSelectedTasks, onGantt, onList, on
     }, [])
     
     return (
-        <motion.div layout className="flex flex-row items-center py-2 px-4 border-1 mt-1 border-[#e5e5e5]">
+        <motion.div layout className="flex flex-row items-center py-2 px-4 border-1 border-[#e5e5e5]">
             <div className="flex flex-row items-center gap-4">
                 <ViewSwitchButton
                     active={ ganttViewActive }

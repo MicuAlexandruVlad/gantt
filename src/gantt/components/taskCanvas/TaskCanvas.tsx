@@ -6,7 +6,7 @@ interface TaskCanvasProps {
 
 const TaskCanvas: React.FC<TaskCanvasProps> = () => {
     return (
-        <div className="flex-1">
+        <div className="">
             <span>Task Canvas</span>
         </div>
     )

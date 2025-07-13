@@ -6,10 +6,9 @@ import TaskCanvas from "./components/taskCanvas/TaskCanvas"
 type GanttProps = {}
 
 const Gantt: React.FC<GanttProps> = ({}) => {
-
     return (
         <motion.div
-            className="w-full h-full flex flex-row select-none"
+            className="w-full h-full grid grid-cols-[4fr_10fr] select-none overflow-y-auto"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0}}
