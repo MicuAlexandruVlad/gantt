@@ -1,4 +1,5 @@
 import React, { memo } from "react"
+import TaskListHeader from "./ganttTaskListHeader/TaskListHeader"
 
 interface TaskListProps {
 
@@ -7,7 +8,7 @@ interface TaskListProps {
 const TaskList: React.FC<TaskListProps> = () => {
     return (
         <div>
-            
+            <TaskListHeader />
         </div>
     )
 }
