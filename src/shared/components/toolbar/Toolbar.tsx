@@ -4,13 +4,15 @@ import ToolbarButton from "./components/toolbarButton/ToolbarButton"
 import { AnimatePresence, motion } from 'framer-motion'
 
 interface ToolbarProps {
+    hasSelectedTasks?: boolean
     onGantt: () => void
     onList: () => void
     onNewTask: () => void
+    onDelete: () => void
     onExport: () => void
 }
 
-const Toolbar: React.FC<ToolbarProps> = ({ onGantt, onList, onNewTask, onExport }) => {
+const Toolbar: React.FC<ToolbarProps> = ({ hasSelectedTasks, onGantt, onList, onDelete, onNewTask, onExport }) => {
     const [ganttViewActive, setGanttViewActive] = React.useState(true)
     const [listViewActive, setListViewActive] = React.useState(false)
 
@@ -78,9 +80,9 @@ const Toolbar: React.FC<ToolbarProps> = ({ onGantt, onList, onNewTask, onExport 
             </div>
             <div className="flex-1" />
             <AnimatePresence mode="wait">
-                <motion.div layout className="flex flex-row items-center">
+                <motion.div className="flex flex-row items-center">
                     <ToolbarButton
-                        usePrimary
+                        bgColor="#175af9"
                         useRound
                         icon={
                             <svg width="14" height="14" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -89,6 +91,27 @@ const Toolbar: React.FC<ToolbarProps> = ({ onGantt, onList, onNewTask, onExport 
                         }
                         onClick={ onNewTask }
                     />
+                    {
+                        hasSelectedTasks &&
+                        <motion.div
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            transition={{ duration: 0.2 }}
+                            className="ml-2"
+                        >
+                            <ToolbarButton
+                                icon={
+                                    <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 4.17647H17M6 1H12M7 14.7647V8.41177M11 14.7647V8.41177M12.5 19H5.5C4.39543 19 3.5 18.0519 3.5 16.8824L3.0434 5.27937C3.01973 4.67783 3.47392 4.17647 4.04253 4.17647H13.9575C14.5261 4.17647 14.9803 4.67783 14.9566 5.27937L14.5 16.8824C14.5 18.0519 13.6046 19 12.5 19Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                    </svg>
+                                }
+                                useRound
+                                bgColor="#ea4c89"
+                                onClick={ onDelete }
+                            />
+                        </motion.div>
+                    }
                     { separator }
                     <ToolbarButton
                         text="Filter"

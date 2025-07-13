@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import './App.css'
 import Gantt from './gantt/Gantt'
 import Toolbar from './shared/components/toolbar/Toolbar'
@@ -9,13 +9,15 @@ import FloatingAlert from './shared/components/alerts/floatingAlert/FloatingAler
 import { AnimatePresence } from 'framer-motion'
 import { selectedTasksAtom, tasksAtom } from './shared/store/Tasks'
 import { createExcelFile } from './shared/utils/excel/ExcelFactory'
+import ConfirmationModal from './shared/components/modals/confirmationModal/ConfirmationModal'
 
 const App = () => {
-    const [tasks,] = useAtom(tasksAtom)
+    const [tasks, setTasks] = useAtom(tasksAtom)
     const [selectedTasks] = useAtom(selectedTasksAtom)
     const [ganttViewActive, setGanttViewActive] = useState(true)
     const [listViewActive, setListViewActive] = useState(false)
 	const [newTaskModalVisible, setNewTaskModalVisible] = useState(false)
+    const [confirmationModalVisible, setConfirmationModalVisible] = useState(false)
 
     const handleListViewSwitch = useCallback(() => {
         setGanttViewActive(false)
@@ -34,6 +36,24 @@ const App = () => {
 	const onNewTaskModalClose = useCallback(() => {
 		setNewTaskModalVisible(false)
 	}, [])
+
+    const onDeleteTasks = useCallback(() => {
+        // setTasks(prev => prev.filter(task => !selectedTasks.has(task.id)))
+
+        setConfirmationModalVisible(true)
+    }, [selectedTasks])
+
+    const onConfirmationModalClose = useCallback(() => {
+        setConfirmationModalVisible(false)
+    }, [])
+
+    const handleDeleteTasks = useCallback(() => {
+        setTasks(prev => prev.filter(task => !selectedTasks.has(task.id)))
+    }, [selectedTasks])
+
+    const areTasksSelected = useMemo(() => {
+        return selectedTasks.size > 0
+    }, [selectedTasks])
 
     const onExport = useCallback(() => {
         let data = [...tasks]
@@ -55,6 +75,8 @@ const App = () => {
                     onGantt={ handleGanttViewSwitch }
                     onList={ handleListViewSwitch }
                     onNewTask={ onNewTask }
+                    onDelete={ onDeleteTasks }
+                    hasSelectedTasks={ areTasksSelected }
                 />
                 <div className="flex-1 overflow-hidden">
                     <AnimatePresence mode='wait'>
@@ -66,6 +88,14 @@ const App = () => {
             <NewTaskModal
                 open={ newTaskModalVisible }
                 onClose={ onNewTaskModalClose }
+            />
+            <ConfirmationModal
+                isOpen={ confirmationModalVisible } // Placeholder, implement logic to control visibility
+                title="Confirm Action"
+                message="Are you sure you want to delete the selected tasks?"
+                confirmText='Delete'
+                onConfirm={ handleDeleteTasks }
+                onCancel={ onConfirmationModalClose }
             />
             <FloatingAlert />
         </>
