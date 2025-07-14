@@ -4,8 +4,8 @@ import type Task from '../../data/Task'
 const defaultTasks: Task[] = [{
     id: '1',
     name: 'Some task with a very long name that should be truncated in the UI',
-    start: new Date('2023-10-01'),
-    end: new Date('2023-10-05'),
+    start: new Date('2025-03-15'),
+    end: new Date('2025-03-20'),
     progress: 0,
     priority: 'medium',
     assignedTo: [{
@@ -24,8 +24,8 @@ const defaultTasks: Task[] = [{
 }, {
     id: '2',
     name: 'Second Task',
-    start: new Date('2023-10-06'),
-    end: new Date('2023-10-10'),
+    start: new Date('2025-04-01'),
+    end: new Date('2025-04-05'),
     progress: 50,
     priority: 'high',
     assignedTo: [{
@@ -41,8 +41,8 @@ const defaultTasks: Task[] = [{
 }, {
     id: '3',
     name: 'Design UI Components',
-    start: new Date('2023-10-11'),
-    end: new Date('2023-10-15'),
+    start: new Date('2025-04-10'),
+    end: new Date('2025-04-15'),
     progress: 80,
     priority: 'high',
     assignedTo: [{
@@ -58,8 +58,8 @@ const defaultTasks: Task[] = [{
 }, {
     id: '4',
     name: 'API Integration',
-    start: new Date('2023-10-16'),
-    end: new Date('2023-10-20'),
+    start: new Date('2025-05-01'),
+    end: new Date('2025-05-10'),
     progress: 25,
     priority: 'medium',
     assignedTo: [{
@@ -78,8 +78,8 @@ const defaultTasks: Task[] = [{
 }, {
     id: '5',
     name: 'Database Optimization',
-    start: new Date('2023-10-21'),
-    end: new Date('2023-10-25'),
+    start: new Date('2025-06-01'),
+    end: new Date('2025-06-05'),
     progress: 90,
     priority: 'low',
     assignedTo: [{
@@ -95,8 +95,8 @@ const defaultTasks: Task[] = [{
 }, {
     id: '6',
     name: 'User Authentication System',
-    start: new Date('2023-10-26'),
-    end: new Date('2023-10-30'),
+    start: new Date('2025-06-10'),
+    end: new Date('2025-06-15'),
     progress: 100,
     priority: 'high',
     assignedTo: [{
@@ -112,8 +112,8 @@ const defaultTasks: Task[] = [{
 }, {
     id: '7',
     name: 'Testing & QA',
-    start: new Date('2023-11-01'),
-    end: new Date('2023-11-05'),
+    start: new Date('2025-07-01'),
+    end: new Date('2025-07-05'),
     progress: 40,
     priority: 'medium',
     assignedTo: [{
@@ -132,8 +132,8 @@ const defaultTasks: Task[] = [{
 }, {
     id: '8',
     name: 'Documentation',
-    start: new Date('2023-11-06'),
-    end: new Date('2023-11-08'),
+    start: new Date('2025-07-10'),
+    end: new Date('2025-07-15'),
     progress: 15,
     priority: 'low',
     assignedTo: [{
@@ -149,8 +149,8 @@ const defaultTasks: Task[] = [{
 }, {
     id: '9',
     name: 'Performance Monitoring Setup',
-    start: new Date('2023-11-09'),
-    end: new Date('2023-11-12'),
+    start: new Date('2025-07-20'),
+    end: new Date('2025-07-25'),
     progress: 70,
     priority: 'medium',
     assignedTo: [{
@@ -166,8 +166,8 @@ const defaultTasks: Task[] = [{
 }, {
     id: '10',
     name: 'Security Audit',
-    start: new Date('2023-11-13'),
-    end: new Date('2023-11-17'),
+    start: new Date('2025-08-01'),
+    end: new Date('2025-08-05'),
     progress: 60,
     priority: 'high',
     assignedTo: [{
@@ -183,8 +183,8 @@ const defaultTasks: Task[] = [{
 }, {
     id: '11',
     name: 'Mobile App Development',
-    start: new Date('2023-11-18'),
-    end: new Date('2023-11-25'),
+    start: new Date('2025-08-10'),
+    end: new Date('2025-08-20'),
     progress: 30,
     priority: 'medium',
     assignedTo: [{
@@ -203,8 +203,8 @@ const defaultTasks: Task[] = [{
 }, {
     id: '12',
     name: 'Deployment & Launch',
-    start: new Date('2023-11-26'),
-    end: new Date('2023-11-30'),
+    start: new Date('2025-06-01'),
+    end: new Date('2025-06-05'),
     progress: 0,
     priority: 'high',
     assignedTo: [{
@@ -220,8 +220,8 @@ const defaultTasks: Task[] = [{
 }, {
     id: '13',
     name: 'Code Review & Refactoring',
-    start: new Date('2023-12-01'),
-    end: new Date('2023-12-05'),
+    start: new Date('2025-06-10'),
+    end: new Date('2025-06-15'),
     progress: 85,
     priority: 'medium',
     assignedTo: [{
@@ -237,8 +237,8 @@ const defaultTasks: Task[] = [{
 }, {
     id: '14',
     name: 'User Training Materials',
-    start: new Date('2023-12-06'),
-    end: new Date('2023-12-10'),
+    start: new Date('2025-06-20'),
+    end: new Date('2025-06-25'),
     progress: 20,
     priority: 'low',
     assignedTo: [{
@@ -257,8 +257,8 @@ const defaultTasks: Task[] = [{
 }, {
     id: '15',
     name: 'Data Migration',
-    start: new Date('2023-12-11'),
-    end: new Date('2023-12-15'),
+    start: new Date('2025-07-01'),
+    end: new Date('2025-07-05'),
     progress: 45,
     priority: 'high',
     assignedTo: [{
@@ -274,8 +274,8 @@ const defaultTasks: Task[] = [{
 }, {
     id: '16',
     name: 'Load Testing',
-    start: new Date('2023-12-16'),
-    end: new Date('2023-12-20'),
+    start: new Date('2025-07-10'),
+    end: new Date('2025-07-15'),
     progress: 75,
     priority: 'high',
     assignedTo: [{
@@ -291,8 +291,8 @@ const defaultTasks: Task[] = [{
 }, {
     id: '17',
     name: 'Backup & Recovery Setup',
-    start: new Date('2023-12-21'),
-    end: new Date('2023-12-23'),
+    start: new Date('2025-07-20'),
+    end: new Date('2025-07-25'),
     progress: 100,
     priority: 'medium',
     assignedTo: [{
@@ -308,8 +308,8 @@ const defaultTasks: Task[] = [{
 }, {
     id: '18',
     name: 'Analytics Integration',
-    start: new Date('2024-01-02'),
-    end: new Date('2024-01-08'),
+    start: new Date('2025-08-01'),
+    end: new Date('2025-08-05'),
     progress: 10,
     priority: 'medium',
     assignedTo: [{
@@ -325,8 +325,8 @@ const defaultTasks: Task[] = [{
 }, {
     id: '19',
     name: 'Customer Support Portal',
-    start: new Date('2024-01-09'),
-    end: new Date('2024-01-15'),
+    start: new Date('2025-08-10'),
+    end: new Date('2025-08-15'),
     progress: 35,
     priority: 'low',
     assignedTo: [{
@@ -345,8 +345,8 @@ const defaultTasks: Task[] = [{
 }, {
     id: '20',
     name: 'Payment Gateway Integration',
-    start: new Date('2024-01-16'),
-    end: new Date('2024-01-22'),
+    start: new Date('2025-08-16'),
+    end: new Date('2025-08-22'),
     progress: 55,
     priority: 'high',
     assignedTo: [{
@@ -362,8 +362,8 @@ const defaultTasks: Task[] = [{
 }, {
     id: '21',
     name: 'Social Media Integration',
-    start: new Date('2024-01-23'),
-    end: new Date('2024-01-29'),
+    start: new Date('2025-08-23'),
+    end: new Date('2025-08-29'),
     progress: 90,
     priority: 'low',
     assignedTo: [{
@@ -379,8 +379,8 @@ const defaultTasks: Task[] = [{
 }, {
     id: '22',
     name: 'Final Security Review',
-    start: new Date('2024-01-30'),
-    end: new Date('2024-02-05'),
+    start: new Date('2025-07-30'),
+    end: new Date('2025-08-05'),
     progress: 0,
     priority: 'high',
     assignedTo: [{
