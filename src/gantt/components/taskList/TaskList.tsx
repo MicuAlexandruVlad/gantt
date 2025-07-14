@@ -10,7 +10,7 @@ interface TaskListProps {
 }
 
 const TaskList: React.FC<TaskListProps> = () => {
-    const [tasks, setTasks] = useAtom(tasksAtom)
+    const [tasks] = useAtom(tasksAtom)
     const [selectedTasks, setSelectedTasks] = useAtom(selectedTasksAtom)
 
     const handleItemSelect = useCallback((taskId: string) => {

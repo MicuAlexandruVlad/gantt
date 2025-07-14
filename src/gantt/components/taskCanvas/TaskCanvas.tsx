@@ -1,4 +1,5 @@
 import React, { memo } from "react"
+import Calendar from "./components/calendar/Calendar"
 
 interface TaskCanvasProps {
 
@@ -7,7 +8,7 @@ interface TaskCanvasProps {
 const TaskCanvas: React.FC<TaskCanvasProps> = () => {
     return (
         <div className="">
-            <span>Task Canvas</span>
+            <Calendar />
         </div>
     )
 }
