@@ -4,6 +4,7 @@ import { useAtom } from "jotai"
 import { selectedTasksAtom, tasksAtom } from "../../../shared/store/Tasks"
 import type Task from "../../../data/Task"
 import Checkbox from "../../../shared/components/checkbox/Checkbox"
+import ProgressDisplay from "../../../shared/components/progressDisplay/ProgressDisplay"
 
 interface TaskListProps {
 
@@ -59,15 +60,21 @@ const TaskListRow: React.FC<{
     return (
         <div
             onClick={ handleSelect }
-            className="gap-2 grid items-center grid-cols-[minmax(20px,20px)_minmax(80px,1fr)_minmax(80px,80px)_minmax(80px,80px)] p-3 border-b border-[#e5e5e5]"
+            className="gap-2 grid items-center grid-cols-[minmax(20px,20px)_minmax(100px,1fr)_minmax(80px,80px)_minmax(80px,80px)] p-3 border-b border-[#e5e5e5]"
         >
             <Checkbox
                 checked={ selected }
                 onChange={() => {}}
             />
-            <span className="truncate">{ task.name }</span>
+            <span className="truncate" title={ task.name }>{ task.name }</span>
             <span className="">{ taskDuration }</span>
-            <span className="">{ task.progress }</span>
+            
+            <div className="flex flex-row items-center gap-2">
+                <ProgressDisplay
+                    progress={ task.progress }
+                />
+                <span className="">{ task.progress } %</span>
+            </div>
         </div>
     )
 })
