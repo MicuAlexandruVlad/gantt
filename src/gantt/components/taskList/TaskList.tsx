@@ -5,6 +5,7 @@ import { selectedTasksAtom, tasksAtom } from "../../../shared/store/Tasks"
 import type Task from "../../../data/Task"
 import Checkbox from "../../../shared/components/checkbox/Checkbox"
 import ProgressDisplay from "../../../shared/components/progressDisplay/ProgressDisplay"
+import { defaultRowHeight } from "../../../shared/store/CanvasControlSore"
 
 interface TaskListProps {
 
@@ -60,7 +61,8 @@ const TaskListRow: React.FC<{
     return (
         <div
             onClick={ handleSelect }
-            className="gap-2 grid items-center grid-cols-[minmax(20px,20px)_minmax(100px,1fr)_minmax(80px,80px)_minmax(80px,80px)] p-3 border-b border-[#e5e5e5]"
+            style={{ height: defaultRowHeight }}
+            className={ `gap-2 ${ selected ? "bg-[#f3f5fc]" : "bg-white" } grid items-center grid-cols-[minmax(20px,20px)_minmax(100px,1fr)_minmax(80px,80px)_minmax(80px,80px)] p-3 border-b border-[#e5e5e5] transition-colors hover:bg-[#f5f5f5] cursor-pointer select-none` }
         >
             <Checkbox
                 checked={ selected }

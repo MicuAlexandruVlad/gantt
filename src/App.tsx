@@ -10,10 +10,14 @@ import { AnimatePresence } from 'framer-motion'
 import { selectedTasksAtom, tasksAtom } from './shared/store/Tasks'
 import { createExcelFile } from './shared/utils/excel/ExcelFactory'
 import ConfirmationModal from './shared/components/modals/confirmationModal/ConfirmationModal'
+import { decreaseCanvasCellWidthAtom, increaseCanvasCellWidthAtom } from './shared/store/CanvasControlSore'
 
 const App = () => {
     const [tasks, setTasks] = useAtom(tasksAtom)
     const [selectedTasks] = useAtom(selectedTasksAtom)
+    const [,increaseCanvasCellWidth] = useAtom(increaseCanvasCellWidthAtom)
+    const [,decreaseCanvasCellWidth] = useAtom(decreaseCanvasCellWidthAtom)
+
     const [ganttViewActive, setGanttViewActive] = useState(true)
     const [listViewActive, setListViewActive] = useState(false)
 	const [newTaskModalVisible, setNewTaskModalVisible] = useState(false)
@@ -51,9 +55,6 @@ const App = () => {
         setTasks(prev => prev.filter(task => !selectedTasks.has(task.id)))
     }, [selectedTasks])
 
-    const areTasksSelected = useMemo(() => {
-        return selectedTasks.size > 0
-    }, [selectedTasks])
 
     const onExport = useCallback(() => {
         let data = [...tasks]
@@ -66,6 +67,10 @@ const App = () => {
         
         createExcelFile(data, 'tasks_export')
     }, [tasks, selectedTasks])
+
+    const areTasksSelected = useMemo(() => {
+        return selectedTasks.size > 0
+    }, [selectedTasks])
     
     return (
         <>
@@ -76,6 +81,8 @@ const App = () => {
                     onList={ handleListViewSwitch }
                     onNewTask={ onNewTask }
                     onDelete={ onDeleteTasks }
+                    onZoomIn={ increaseCanvasCellWidth }
+                    onZoomOut={ decreaseCanvasCellWidth }
                     hasSelectedTasks={ areTasksSelected }
                 />
                 <div className="flex-1 overflow-hidden">
@@ -90,7 +97,7 @@ const App = () => {
                 onClose={ onNewTaskModalClose }
             />
             <ConfirmationModal
-                isOpen={ confirmationModalVisible } // Placeholder, implement logic to control visibility
+                isOpen={ confirmationModalVisible }
                 title="Confirm Action"
                 message="Are you sure you want to delete the selected tasks?"
                 confirmText='Delete'

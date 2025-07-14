@@ -9,10 +9,12 @@ interface ToolbarProps {
     onList: () => void
     onNewTask: () => void
     onDelete: () => void
+    onZoomIn: () => void
+    onZoomOut: () => void
     onExport: () => void
 }
 
-const Toolbar: React.FC<ToolbarProps> = ({ hasSelectedTasks, onGantt, onList, onDelete, onNewTask, onExport }) => {
+const Toolbar: React.FC<ToolbarProps> = ({ hasSelectedTasks, onGantt, onList, onDelete, onZoomIn, onZoomOut, onNewTask, onExport }) => {
     const [ganttViewActive, setGanttViewActive] = React.useState(true)
     const [listViewActive, setListViewActive] = React.useState(false)
 
@@ -32,9 +34,9 @@ const Toolbar: React.FC<ToolbarProps> = ({ hasSelectedTasks, onGantt, onList, on
 
     const handleFilter = useCallback(() => {}, [])
 
-    const handleZoomIn = useCallback(() => {}, [])
+    const handleZoomIn = useCallback(() => onZoomIn(), [])
 
-    const handleZoomOut = useCallback(() => {}, [])
+    const handleZoomOut = useCallback(() => onZoomOut(), [])
 
     const handleShare = useCallback(() => {}, [])
 

@@ -7,7 +7,7 @@ interface TaskCanvasProps {
 
 const TaskCanvas: React.FC<TaskCanvasProps> = () => {
     return (
-        <div className="">
+        <div className="col-span-3">
             <Calendar />
         </div>
     )

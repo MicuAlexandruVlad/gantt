@@ -3,6 +3,7 @@ import DayItem from "./components/DayItem"
 import { useAtom } from "jotai"
 import { tasksAtom } from "../../../../../shared/store/Tasks"
 import { getDateRange } from "../../../../../shared/utils/task/TaskUtils"
+import MonthItem from "./components/MonthItem"
 
 type CalendarProps = {
 
@@ -11,33 +12,35 @@ type CalendarProps = {
 const Calendar: React.FC<CalendarProps> = () => {
     const [tasks] = useAtom(tasksAtom)
 
-    const dayRange = useMemo(() => {
-        const dayItemsJSX = []
+    const monthRangeJSX = useMemo(() => {
+        const monthItemsJSX = []
         const { start, end } = getDateRange(tasks)
         let currentDate = new Date(start)
+        currentDate.setHours(0, 0, 0, 0) // reset time to midnight
         
         while (currentDate < end) {
-            dayItemsJSX.push(
-                <DayItem
+            monthItemsJSX.push(
+                <MonthItem
                     key={ currentDate.toISOString() }
-                    dayNumber={ currentDate.getDate() }
-                    dayName={ currentDate.toLocaleDateString("en-US", { weekday: "short" }).substring(0, 1) }
-                    isCurrentDay={ currentDate.toDateString() === new Date().toDateString() }
+                    start={ new Date(currentDate.getFullYear(), currentDate.getMonth(), 1) }
+                    end={ new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0) }
                 />
             )
 
-            currentDate.setDate(currentDate.getDate() + 1)
+            // increment to the next month
+            currentDate.setMonth(currentDate.getMonth() + 1)
+
         }
     
-        console.log("Day items JSX:", dayItemsJSX)
+        console.log("Day items JSX:", monthItemsJSX)
         console.log('range:', { start, end })
 
-        return dayItemsJSX
+        return monthItemsJSX
     }, [tasks])
     
     return (
-        <div className="flex w-fit shadow-md bg-white sticky top-0 p-3 z-10">
-        { dayRange }
+        <div className="flex w-fit shadow-md bg-white sticky top-0 p-2 z-10">
+        { monthRangeJSX }
         </div>
     )
 }
