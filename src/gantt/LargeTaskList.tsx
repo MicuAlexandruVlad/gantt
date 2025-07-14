@@ -1,4 +1,4 @@
-import { useAtom } from "jotai"
+import { useAtom, useAtomValue } from "jotai"
 import React, { memo, useCallback } from "react"
 import { allSelectedAtom, selectedTasksAtom, tasksAtom } from "../shared/store/Tasks"
 import type Task from "../data/Task"
@@ -8,7 +8,7 @@ import { motion } from "framer-motion"
 type TaskListProps = {}
 
 const LargeTaskList: React.FC<TaskListProps> = ({}) => {
-    const [tasks, _] = useAtom(tasksAtom)
+    const tasks = useAtomValue(tasksAtom)
     const [selectedTasks, setSelectedTasks] = useAtom(selectedTasksAtom)
     const [allSelected, toggleAllSelected] = useAtom(allSelectedAtom)
 

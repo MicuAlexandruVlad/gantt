@@ -1,6 +1,6 @@
 import React, { memo, useMemo } from "react"
 import DayItem from "./components/DayItem"
-import { useAtom } from "jotai"
+import { useAtom, useAtomValue } from "jotai"
 import { tasksAtom } from "../../../../../shared/store/Tasks"
 import { getDateRange } from "../../../../../shared/utils/task/TaskUtils"
 import MonthItem from "./components/MonthItem"
@@ -10,7 +10,7 @@ type CalendarProps = {
 }
 
 const Calendar: React.FC<CalendarProps> = () => {
-    const [tasks] = useAtom(tasksAtom)
+    const tasks = useAtomValue(tasksAtom)
 
     const monthRangeJSX = useMemo(() => {
         const monthItemsJSX = []

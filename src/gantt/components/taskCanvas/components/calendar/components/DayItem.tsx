@@ -1,4 +1,4 @@
-import { useAtom } from "jotai"
+import { useAtomValue } from "jotai"
 import React, { useEffect } from "react"
 import { canvasCellWidthAtom } from "../../../../../../shared/store/CanvasControlSore"
 
@@ -9,7 +9,7 @@ type DayItemProps = {
 }
 
 const DayItem: React.FC<DayItemProps> = ({ dayName, dayNumber, isCurrentDay = false }) => {
-    const [cellWidth] = useAtom(canvasCellWidthAtom)
+    const cellWidth = useAtomValue(canvasCellWidthAtom)
 
     useEffect(() => {
         console.log(`DayItem rendered with cell width: ${cellWidth}px`)
