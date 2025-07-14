@@ -11,10 +11,6 @@ type DayItemProps = {
 const DayItem: React.FC<DayItemProps> = ({ dayName, dayNumber, isCurrentDay = false }) => {
     const cellWidth = useAtomValue(canvasCellWidthAtom)
 
-    useEffect(() => {
-        console.log(`DayItem rendered with cell width: ${cellWidth}px`)
-    }, [cellWidth])
-    
     return (
         <div
             style={{ minWidth: cellWidth }}
