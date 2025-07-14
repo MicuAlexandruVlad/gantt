@@ -27,3 +27,5 @@ export const decreaseCanvasCellWidthAtom = atom(
     }
 )
 
+export const startingDateAtom = atom(new Date())
+
