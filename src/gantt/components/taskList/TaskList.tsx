@@ -28,7 +28,7 @@ const TaskList: React.FC<TaskListProps> = () => {
     }, [])
     
     return (
-        <div className="flex flex-col min-h-fit border-r-1 border-[#e5e5e5]">
+        <div className="flex flex-col col-span-1 min-w-fit min-h-fit sticky left-0 top-0 z-50 border-r-1 border-[#e5e5e5]">
             <TaskListHeader />
             <div className="flex-1">
                 {
