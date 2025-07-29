@@ -1,5 +1,4 @@
 import React, { memo } from "react"
-import { motion } from "framer-motion"
 
 
 type Props = {
@@ -9,17 +8,12 @@ type Props = {
 
 const Checkbox: React.FC<Props> = ({ checked, onChange }) => {
     return (
-        <motion.div
+        <div
             onClick={ onChange }
-            className={`flex items-center justify-center ${ checked ? 'bg-[#415BE9]' : 'bg-[#F5F5F5]' } w-[16px] h-[16px] ${ !checked ? 'border border-[#C5C5C5]' : '' } rounded-[4px] transition-colors duration-200`}>
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: checked ? 1 : 0 }}
-                transition={{ duration: 0.2 }}
-            >
-                { checkSVG }
-            </motion.div>
-        </motion.div>
+            className={`flex items-center justify-center ${ checked ? 'bg-[#415BE9]' : 'bg-[#F5F5F5]' } w-[16px] h-[16px] ${ !checked ? 'border border-[#C5C5C5]' : '' } rounded-[4px] transition-colors duration-200`}
+        >
+            { checked && checkSVG }
+        </div>
     )
 }
 
@@ -29,4 +23,6 @@ const checkSVG = (
     </svg>
 )
 
-export default memo(Checkbox)
+export default memo(Checkbox, (prev, next) => {
+    return prev.checked === next.checked
+})

@@ -1,402 +1,134 @@
 import { atom } from 'jotai'
 import type Task from '../../data/Task'
 
-const defaultTasks: Task[] = [{
-    id: '1',
-    name: 'Some task with a very long name that should be truncated in the UI',
-    start: new Date('2025-03-15'),
-    end: new Date('2025-03-20'),
-    progress: 0,
-    priority: 'medium',
-    assignedTo: [{
-        id: '1',
-        name: 'John Doe'
-    }, {
-        id: '3',
-        name: 'Alice Johnson'
-    }],
-    dependencies: [],
-    description: 'This is a sample task for demonstration purposes.',
-    completed: false,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    isActive: true,
-}, {
-    id: '2',
-    name: 'Second Task',
-    start: new Date('2025-04-01'),
-    end: new Date('2025-04-05'),
-    progress: 50,
-    priority: 'high',
-    assignedTo: [{
-        id: '2',
-        name: 'Jane Smith'
-    }],
-    dependencies: ['1'],
-    description: 'This task is not dependent on the first task.',
-    completed: false,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    isActive: true,
-}, {
-    id: '3',
-    name: 'Design UI Components',
-    start: new Date('2025-04-10'),
-    end: new Date('2025-04-15'),
-    progress: 80,
-    priority: 'high',
-    assignedTo: [{
-        id: '4',
-        name: 'Emily Chen'
-    }],
-    dependencies: ['2'],
-    description: 'Create reusable UI components for the dashboard.',
-    completed: false,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    isActive: true,
-}, {
-    id: '4',
-    name: 'API Integration',
-    start: new Date('2025-05-01'),
-    end: new Date('2025-05-10'),
-    progress: 25,
-    priority: 'medium',
-    assignedTo: [{
-        id: '5',
-        name: 'Mike Wilson'
-    }, {
-        id: '6',
-        name: 'Sarah Davis'
-    }],
-    dependencies: ['3'],
-    description: 'Integrate third-party APIs for data synchronization.',
-    completed: false,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    isActive: true,
-}, {
-    id: '5',
-    name: 'Database Optimization',
-    start: new Date('2025-06-01'),
-    end: new Date('2025-06-05'),
-    progress: 90,
-    priority: 'low',
-    assignedTo: [{
-        id: '7',
-        name: 'David Brown'
-    }],
-    dependencies: [],
-    description: 'Optimize database queries for better performance.',
-    completed: false,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    isActive: false,
-}, {
-    id: '6',
-    name: 'User Authentication System',
-    start: new Date('2025-06-10'),
-    end: new Date('2025-06-15'),
-    progress: 100,
-    priority: 'high',
-    assignedTo: [{
-        id: '8',
-        name: 'Lisa Garcia'
-    }],
-    dependencies: ['4'],
-    description: 'Implement secure user authentication and authorization.',
-    completed: true,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    isActive: true,
-}, {
-    id: '7',
-    name: 'Testing & QA',
-    start: new Date('2025-07-01'),
-    end: new Date('2025-07-05'),
-    progress: 40,
-    priority: 'medium',
-    assignedTo: [{
-        id: '9',
-        name: 'Robert Martinez'
-    }, {
-        id: '10',
-        name: 'Anna Thompson'
-    }],
-    dependencies: ['5', '6'],
-    description: 'Comprehensive testing of all application features.',
-    completed: false,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    isActive: true,
-}, {
-    id: '8',
-    name: 'Documentation',
-    start: new Date('2025-07-10'),
-    end: new Date('2025-07-15'),
-    progress: 15,
-    priority: 'low',
-    assignedTo: [{
-        id: '11',
-        name: 'Kevin Lee'
-    }],
-    dependencies: [],
-    description: 'Create comprehensive documentation for the project.',
-    completed: false,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    isActive: true,
-}, {
-    id: '9',
-    name: 'Performance Monitoring Setup',
-    start: new Date('2025-07-20'),
-    end: new Date('2025-07-25'),
-    progress: 70,
-    priority: 'medium',
-    assignedTo: [{
-        id: '12',
-        name: 'Michelle White'
-    }],
-    dependencies: ['7'],
-    description: 'Set up monitoring tools for application performance tracking.',
-    completed: false,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    isActive: true,
-}, {
-    id: '10',
-    name: 'Security Audit',
-    start: new Date('2025-08-01'),
-    end: new Date('2025-08-05'),
-    progress: 60,
-    priority: 'high',
-    assignedTo: [{
-        id: '13',
-        name: 'James Rodriguez'
-    }],
-    dependencies: ['6'],
-    description: 'Conduct thorough security audit of the application.',
-    completed: false,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    isActive: true,
-}, {
-    id: '11',
-    name: 'Mobile App Development',
-    start: new Date('2025-08-10'),
-    end: new Date('2025-08-20'),
-    progress: 30,
-    priority: 'medium',
-    assignedTo: [{
-        id: '14',
-        name: 'Amy Johnson'
-    }, {
-        id: '15',
-        name: 'Chris Taylor'
-    }],
-    dependencies: ['3'],
-    description: 'Develop mobile application for iOS and Android platforms.',
-    completed: false,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    isActive: true,
-}, {
-    id: '12',
-    name: 'Deployment & Launch',
-    start: new Date('2025-06-01'),
-    end: new Date('2025-06-05'),
-    progress: 0,
-    priority: 'high',
-    assignedTo: [{
-        id: '16',
-        name: 'Tom Anderson'
-    }],
-    dependencies: ['9', '10'],
-    description: 'Deploy application to production and coordinate launch.',
-    completed: false,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    isActive: false,
-}, {
-    id: '13',
-    name: 'Code Review & Refactoring',
-    start: new Date('2025-06-10'),
-    end: new Date('2025-06-15'),
-    progress: 85,
-    priority: 'medium',
-    assignedTo: [{
-        id: '17',
-        name: 'Daniel Kim'
-    }],
-    dependencies: ['11'],
-    description: 'Review codebase and refactor for maintainability.',
-    completed: false,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    isActive: true,
-}, {
-    id: '14',
-    name: 'User Training Materials',
-    start: new Date('2025-06-20'),
-    end: new Date('2025-06-25'),
-    progress: 20,
-    priority: 'low',
-    assignedTo: [{
-        id: '18',
-        name: 'Rachel Green'
-    }, {
-        id: '19',
-        name: 'Mark Thompson'
-    }],
-    dependencies: ['8'],
-    description: 'Create training videos and user guides.',
-    completed: false,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    isActive: true,
-}, {
-    id: '15',
-    name: 'Data Migration',
-    start: new Date('2025-07-01'),
-    end: new Date('2025-07-05'),
-    progress: 45,
-    priority: 'high',
-    assignedTo: [{
-        id: '20',
-        name: 'Steven Clark'
-    }],
-    dependencies: ['5'],
-    description: 'Migrate legacy data to new system.',
-    completed: false,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    isActive: true,
-}, {
-    id: '16',
-    name: 'Load Testing',
-    start: new Date('2025-07-10'),
-    end: new Date('2025-07-15'),
-    progress: 75,
-    priority: 'high',
-    assignedTo: [{
-        id: '21',
-        name: 'Patricia Lewis'
-    }],
-    dependencies: ['9'],
-    description: 'Conduct load testing to ensure system scalability.',
-    completed: false,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    isActive: true,
-}, {
-    id: '17',
-    name: 'Backup & Recovery Setup',
-    start: new Date('2025-07-20'),
-    end: new Date('2025-07-25'),
-    progress: 100,
-    priority: 'medium',
-    assignedTo: [{
-        id: '22',
-        name: 'Brian Walker'
-    }],
-    dependencies: ['15'],
-    description: 'Implement automated backup and disaster recovery procedures.',
-    completed: true,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    isActive: true,
-}, {
-    id: '18',
-    name: 'Analytics Integration',
-    start: new Date('2025-08-01'),
-    end: new Date('2025-08-05'),
-    progress: 10,
-    priority: 'medium',
-    assignedTo: [{
-        id: '23',
-        name: 'Jennifer Hall'
-    }],
-    dependencies: ['12'],
-    description: 'Integrate analytics tools for user behavior tracking.',
-    completed: false,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    isActive: true,
-}, {
-    id: '19',
-    name: 'Customer Support Portal',
-    start: new Date('2025-08-10'),
-    end: new Date('2025-08-15'),
-    progress: 35,
-    priority: 'low',
-    assignedTo: [{
-        id: '24',
-        name: 'Jason Young'
-    }, {
-        id: '25',
-        name: 'Laura Adams'
-    }],
-    dependencies: ['14'],
-    description: 'Build customer support ticketing system.',
-    completed: false,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    isActive: true,
-}, {
-    id: '20',
-    name: 'Payment Gateway Integration',
-    start: new Date('2025-08-16'),
-    end: new Date('2025-08-22'),
-    progress: 55,
-    priority: 'high',
-    assignedTo: [{
-        id: '26',
-        name: 'Michael Scott'
-    }],
-    dependencies: ['6'],
-    description: 'Integrate secure payment processing system.',
-    completed: false,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    isActive: true,
-}, {
-    id: '21',
-    name: 'Social Media Integration',
-    start: new Date('2025-08-23'),
-    end: new Date('2025-08-29'),
-    progress: 90,
-    priority: 'low',
-    assignedTo: [{
-        id: '27',
-        name: 'Nancy Wilson'
-    }],
-    dependencies: ['18'],
-    description: 'Add social media login and sharing capabilities.',
-    completed: false,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    isActive: true,
-}, {
-    id: '22',
-    name: 'Final Security Review',
-    start: new Date('2025-07-30'),
-    end: new Date('2025-08-05'),
-    progress: 0,
-    priority: 'high',
-    assignedTo: [{
-        id: '28',
-        name: 'Paul Martin'
-    }],
-    dependencies: ['20', '21'],
-    description: 'Comprehensive final security assessment before production.',
-    completed: false,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    isActive: false,
-}]
+
+const assigneeNames = [
+    'John Doe',
+    'Jane Smith',
+    'Alice Johnson',
+    'Emily Chen',
+    'Mike Wilson',
+    'Sarah Davis',
+    'David Brown',
+    'Lisa Garcia',
+    'Robert Martinez',
+    'Anna Thompson',
+    'Kevin Lee',
+    'Michelle White',
+    'James Rodriguez'
+]
+
+const taskNames = [
+    'Design Dashboard',
+    'Implement Authentication',
+    'Setup Database',
+    'Create API Endpoints',
+    'Develop Frontend',
+    'Write Unit Tests',
+    'Deploy Application',
+    'Monitor Performance',
+    'Conduct User Testing',
+    'Gather Feedback',
+    'Refactor Codebase',
+    'Optimize Performance',
+    'Document Code',
+    'Prepare Release Notes',
+    'Plan Next Sprint',
+    'Conduct Retrospective',
+    'Update Dependencies',
+    'Fix Bugs',
+    'Improve UI/UX',
+    'Conduct Code Review',
+    'Setup CI/CD Pipeline',
+    'Implement Security Measures',
+    'Create User Guides',
+    'Train Team Members',
+    'Conduct Knowledge Sharing',
+    'Setup Development Environment',
+    'Conduct Team Building',
+    'Review Project Goals',
+    'Conduct Market Research',
+    'Analyze User Behavior',
+    'Implement New Features',
+    'Conduct A/B Testing',
+]
+
+const taskDescriptions = [
+    'This task involves designing the initial layout and components for the dashboard.',
+    'Implement user authentication using JWT and OAuth protocols.',
+    'Setup the database schema and initial data migration scripts.',
+    'Create RESTful API endpoints for user management and data retrieval.',
+    'Develop the frontend application using React and Redux.',
+    'Write unit tests for critical components to ensure code quality.',
+    'Deploy the application to production environment using Docker.',
+    'Monitor application performance using APM tools like New Relic.',
+    'Conduct user testing sessions to gather feedback on usability.',
+    'Gather feedback from users to improve features and functionality.',
+    'Refactor codebase to improve maintainability and readability.',
+    'Optimize performance by analyzing bottlenecks and improving algorithms.',
+    'Document code thoroughly for future reference and onboarding new developers.',
+    'Prepare release notes summarizing changes and new features in the latest version.',
+    'Plan next sprint by reviewing backlog and prioritizing tasks.',
+    'Conduct retrospective meeting to discuss what went well and what can be improved.',
+    'Update project dependencies to the latest versions for security and performance improvements.',
+    'Fix bugs reported by users and improve overall application stability.',
+    'Improve UI/UX by implementing user feedback and best practices.',
+    'Conduct code review sessions to ensure code quality and adherence to standards.',
+    'Setup CI/CD pipeline using GitHub Actions for automated testing and deployment.',
+    'Implement security measures to protect user data and prevent unauthorized access.',
+    'Create user guides and documentation to help users navigate the application.',
+    'Train team members on new technologies and best practices.',
+    'Conduct knowledge sharing sessions to promote learning within the team.',
+    'Setup development environment with necessary tools and configurations.',
+    'Conduct team building activities to improve collaboration and morale.',
+    'Review project goals and ensure alignment with business objectives.',
+    'Conduct market research to identify trends and opportunities for improvement.',
+    'Analyze user behavior using analytics tools to understand usage patterns.',
+    'Implement new features based on user feedback and market research.',
+    'Conduct A/B testing to evaluate the effectiveness of new features.',
+    'This task involves designing the initial layout and components for the dashboard.',
+]
+
+const generateTasks = (numTasks: number, startDate: Date, endDate: Date, maxSizeInDays: number): Task[] => {
+    return Array.from({ length: numTasks }, (_, index) => {
+        const taskStart = new Date(startDate.getTime() + Math.random() * (endDate.getTime() - startDate.getTime()))
+        const taskEnd = new Date(taskStart.getTime() + Math.random() * maxSizeInDays * 24 * 60 * 60 * 1000)
+
+        return {
+            id: (index + 1).toString(),
+            name: taskNames[index % taskNames.length],
+            start: taskStart,
+            end: taskEnd,
+            progress: Math.floor(Math.random() * 101),
+            priority: (['low', 'medium', 'high'] as const)[Math.floor(Math.random() * 3)],
+            assignedTo: Array.from({ length: Math.floor(Math.random() * 3) + 1 }, () => ({
+                id: (Math.floor(Math.random() * assigneeNames.length) + 1).toString(),
+                name: assigneeNames[Math.floor(Math.random() * assigneeNames.length)]
+            })),
+            dependencies: [],
+            description: taskDescriptions[index % taskDescriptions.length],
+            completed: Math.random() < 0.5,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            isActive: true,
+        }
+    })
+}
+
+const defaultTasks: Task[] = generateTasks(10, new Date('2025-05-01'), new Date('2025-07-30'), 10)
 
 export const tasksAtom = atom<Task[]>(defaultTasks)
 tasksAtom.debugLabel = 'tasksAtom'
+
+export const updateTaskAtom = atom(
+    null,
+    (get, set, task: Task) => {
+        const tasks = get(tasksAtom)
+        const updatedTasks = tasks.map(t => t.id === task.id ? { ...t, ...task } : t)
+
+        set(tasksAtom, updatedTasks)
+    }
+)
 
 export const selectedTasksAtom = atom<Set<string>>(new Set<string>())
 selectedTasksAtom.debugLabel = 'selectedTasksAtom'

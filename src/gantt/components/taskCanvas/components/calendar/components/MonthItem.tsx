@@ -37,8 +37,8 @@ const MonthItem: React.FC<MonthItemProps> = ({ start, end }) => {
     }, [start, end])
 
     return (
-        <div className="flex flex-col gap-2 border-r-1 border-[#e5e5e5] px-2">
-            <span className="text-sm pl-2 text-[#656771]">{ fullMonthName }, { year }</span>
+        <div className="flex flex-col gap-2 border-r-1 border-[#e5e5e5]">
+            <span className="text-sm pl-2 text-[#656771] truncate">{ fullMonthName }, { year }</span>
             <div className="flex flex-row">{ dayItemsJSX }</div>
         </div>
     )

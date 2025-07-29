@@ -50,4 +50,6 @@ const ProgressDisplay: React.FC<ProgressDisplayProps> = ({
     )
 }
 
-export default React.memo(ProgressDisplay)
+export default React.memo(ProgressDisplay, (prevProps, nextProps) => {
+    return prevProps.progress === nextProps.progress
+})

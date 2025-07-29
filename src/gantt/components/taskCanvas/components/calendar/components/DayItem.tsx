@@ -1,5 +1,5 @@
 import { useAtomValue } from "jotai"
-import React, { useEffect } from "react"
+import React from "react"
 import { canvasCellWidthAtom } from "../../../../../../shared/store/CanvasControlSore"
 
 type DayItemProps = {
@@ -14,7 +14,7 @@ const DayItem: React.FC<DayItemProps> = ({ dayName, dayNumber, isCurrentDay = fa
     return (
         <div
             style={{ minWidth: cellWidth }}
-            className={ `flex flex-row gap-1 items-center ${ isCurrentDay && "bg-[#175af9]" } px-2 rounded-full py text-sm` }>
+            className={ `flex flex-row gap-1 items-center ${ isCurrentDay && "bg-[#175af9]" } justify-center rounded-full py text-sm` }>
             <span className={ `${ isCurrentDay ? "text-[#f8f8f8]" : "text-[#656771]" }` }>{ dayName }</span>
             <span className={ `${ isCurrentDay && "text-white" } font-bold` }>{ dayNumber }</span>
         </div>
